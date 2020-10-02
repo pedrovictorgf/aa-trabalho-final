@@ -2,6 +2,10 @@ from utils import generateMatrix
 import time
 import os
 
+path = os.getcwd()+"/traditional/"
+if not os.path.exists(path):
+	os.mkdir(path)
+
 def traditionalMatrixMultiplication(X, Y):
 	n = len(X)
 	
@@ -25,7 +29,7 @@ def runExperiment(n):
 		t2 = time.time();
 		timeRecord.append(t2-t1)
 
-	with open(os.getcwd() + '/traditional/traditional_experiment'+str(time.time())+'.txt', 'x') as f:
+	with open(path +'traditional_experiment'+str(time.time())+'.txt', 'x') as f:
 		for t in timeRecord:
 			f.write(str(t)+"\n")
 

@@ -2,6 +2,10 @@ from utils import generateMatrix
 import time
 import os
 
+path = os.getcwd()+"/strassen/"
+if not os.path.exists(path):
+	os.mkdir(path)
+
 def addMatrices(X, Y):
 	n = len(X)
 	Z = [n * [0] for x in range(0,n)]
@@ -85,7 +89,7 @@ def runExperiment(n):
 		t2 = time.time();
 		timeRecord.append(t2-t1)
 
-	with open(os.getcwd() + '/strassen/strassen_experiment'+str(time.time())+'.txt', 'x') as f:
+	with open(path + 'strassen_experiment'+str(time.time())+'.txt', 'x') as f:
 		for t in timeRecord:
 			f.write(str(t)+"\n")
 
