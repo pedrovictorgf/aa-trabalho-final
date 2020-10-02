@@ -6,7 +6,7 @@ path = os.getcwd()+"/strassen/"
 if not os.path.exists(path):
 	os.mkdir(path)
 
-def addMatrices(X, Y):
+def add(X, Y):
 	n = len(X)
 	Z = [n * [0] for x in range(0,n)]
 
@@ -16,7 +16,7 @@ def addMatrices(X, Y):
 
 	return Z
 
-def subMatrices(X, Y):
+def subtract(X, Y):
 	n = len(X)
 	Z = [n * [0] for x in range(0,n)]
 
@@ -56,18 +56,18 @@ def strassenMultiplication(X, Y):
 			G[i][j] = Y[k+i][j]
 			H[i][j] = Y[k+i][k+j]
 
-	P1 = strassenMultiplication(A, subMatrices(F, H))
-	P2 = strassenMultiplication(addMatrices(A,B), H)
-	P3 = strassenMultiplication(addMatrices(C,D), E)
-	P4 = strassenMultiplication(D, subMatrices(G,E))
-	P5 = strassenMultiplication(addMatrices(A,D), addMatrices(E,H))
-	P6 = strassenMultiplication(subMatrices(B,D), addMatrices(G,H))
-	P7 = strassenMultiplication(subMatrices(A,C), addMatrices(E,F))
+	P1 = strassenMultiplication(A, subtract(F, H))
+	P2 = strassenMultiplication(add(A,B), H)
+	P3 = strassenMultiplication(add(C,D), E)
+	P4 = strassenMultiplication(D, subtract(G,E))
+	P5 = strassenMultiplication(add(A,D), add(E,H))
+	P6 = strassenMultiplication(subtract(B,D), add(G,H))
+	P7 = strassenMultiplication(subtract(A,C), add(E,F))
 
-	P8 = addMatrices(subMatrices(addMatrices(P5, P4), P2), P6)
-	P9 = addMatrices(P1, P2)
-	P10 = addMatrices(P3, P4)
-	P11 =  subMatrices(subMatrices(addMatrices(P5, P1), P3), P7)
+	P8 = add(subtract(add(P5, P4), P2), P6)
+	P9 = add(P1, P2)
+	P10 = add(P3, P4)
+	P11 =  subtract(subtract(add(P5, P1), P3), P7)
 
 	for i in range(0,k):
 		for j in range(0, k):
