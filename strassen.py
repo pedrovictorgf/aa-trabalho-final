@@ -1,6 +1,7 @@
 from utils import generateMatrix
 import time
 import os
+import math
 
 path = os.getcwd()+"/strassen/"
 if not os.path.exists(path):
@@ -24,7 +25,6 @@ def subtract(X, Y):
 		for j in range(0,n):
 			Z[i][j] = X[i][j] - Y[i][j]
 	return Z 
-
 
 def strassenMultiplication(X, Y):
 	n = len(X)
@@ -78,20 +78,44 @@ def strassenMultiplication(X, Y):
 
 	return Z
 
+def strassen(X, Y):   
+	assert type(X) == list and type(Y) == list
+	assert len(X) == len(X[0]) == len(Y) == len(Y[0])
+
+	nextPowerOfTwo = lambda n: 2 ** int(math.ceil(math.log(n, 2)))
+	n = len(X)
+	m = nextPowerOfTwo(n)
+	XPrep = [m * [0] for j in range(m)]
+	YPrep = [m * [0] for j in range(m)]
+
+	for i in range(n):
+		for j in range(n):
+			XPrep[i][j] = X[i][j]
+			YPrep[i][j] = Y[i][j]
+
+	ZPrep = strassenMultiplication(XPrep, YPrep)
+	Z = [n * [0] for j in range(n)]
+
+	for i in range(n):
+		for j in range(n):
+			Z[i][j] = ZPrep[i][j]
+
+	return Z
+
+
 def runExperiment(n):
 	timeRecord = []
 
-	for i in range(1, n):
-		X = generateMatrix(2**n)
-		Y = generateMatrix(2**n)
-		t1 = time.time();
+	for i in range(1, n+1):
+		X = generateMatrix(2**i)
+		Y = generateMatrix(2**i)
+		t1 = time.time()
 		Z = strassenMultiplication(X, Y)
-		t2 = time.time();
+		t2 = time.time()
 		timeRecord.append(t2-t1)
 
 	with open(path + 'strassen_experiment'+str(time.time())+'.txt', 'x') as f:
 		for t in timeRecord:
 			f.write(str(t)+"\n")
 
-
-runExperiment(5)
+runExperiment(8)

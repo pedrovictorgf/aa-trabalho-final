@@ -4,4 +4,4 @@
 
 1. chmod +x ./run_experiment.sh
 
-2. ./run_expertiment.sh amount_of_executions // the default value is 30
+2. ./run_expertiment.sh amount_of_executions // the default value is 15

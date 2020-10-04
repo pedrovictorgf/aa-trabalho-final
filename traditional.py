@@ -21,7 +21,7 @@ def traditionalMatrixMultiplication(X, Y):
 def runExperiment(n):
 	timeRecord = []
 
-	for i in range(1, n):
+	for i in range(1, n+1):
 		X = generateMatrix(2**i)
 		Y = generateMatrix(2**i)
 		t1 = time.time();
@@ -33,5 +33,4 @@ def runExperiment(n):
 		for t in timeRecord:
 			f.write(str(t)+"\n")
 
-
-runExperiment(5)
+runExperiment(8)
